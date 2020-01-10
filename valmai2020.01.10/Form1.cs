@@ -94,6 +94,9 @@ namespace valmai2020._01._10
                 MessageBox.Show(ex.Message);
                 return;
             }
+            textBoxMarka.Text = "";
+            textBoxTipusa.Text = "";
+            numericAr.Value = numericAr.Minimum;
             DataGridViewTabnlafrisit();
         }
 
