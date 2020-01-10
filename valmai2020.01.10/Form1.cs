@@ -79,8 +79,9 @@ namespace valmai2020._01._10
         private void buttonTorol_Click(object sender, EventArgs e)
         {
             //--Adatellenörzés---
-            Program.sql.CommandText = "DELETE from `telefon` WHERE (`id`, `marka`, `tipus`, `ar`) VALUES (null,@marka,@tipus,@ar)";
+            Program.sql.CommandText = "DELETE from `telefon`where id=@id";
             Program.sql.Parameters.Clear();
+            Program.sql.Parameters.AddWithValue("@id", (int)dataGridTelefonok.SelectedRows[0].Cells["Id"].Value);
             Program.sql.Parameters.AddWithValue("@marka", textBoxMarka.Text);
             Program.sql.Parameters.AddWithValue("@tipus", textBoxTipusa.Text);
             Program.sql.Parameters.AddWithValue("@ar", (int)numericAr.Value);
@@ -94,6 +95,35 @@ namespace valmai2020._01._10
                 return;
             }
             DataGridViewTabnlafrisit();
+        }
+
+        private void buttonModosit_Click(object sender, EventArgs e)
+        {
+            //--Adatellenörzés---
+            Program.sql.CommandText = "UPDATE `telefon` SET `marka`=@marka,`tipus`=@tipus,`ar`=@ar WHERE id=@id";
+            Program.sql.Parameters.Clear();
+            Program.sql.Parameters.AddWithValue("@id", (int)dataGridTelefonok.SelectedRows[0].Cells["Id"].Value);
+            Program.sql.Parameters.AddWithValue("@marka", textBoxMarka.Text);
+            Program.sql.Parameters.AddWithValue("@tipus", textBoxTipusa.Text);
+            Program.sql.Parameters.AddWithValue("@ar", (int)numericAr.Value);
+            try
+            {
+                Program.sql.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            DataGridViewTabnlafrisit();
+        }
+
+        private void dataGridTelefonok_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int aktualissor = dataGridTelefonok.SelectedCells[0].RowIndex;
+            textBoxMarka.Text = dataGridTelefonok.Rows[aktualissor].Cells["Marka"].Value.ToString();
+            textBoxTipusa.Text = dataGridTelefonok.Rows[aktualissor].Cells["Tipus"].Value.ToString();
+            numericAr.Value = (int)dataGridTelefonok.Rows[aktualissor].Cells["Ar"].Value; 
         }
     }
 }

@@ -111,6 +111,7 @@
             this.buttonModosit.TabIndex = 6;
             this.buttonModosit.Text = "Módosit";
             this.buttonModosit.UseVisualStyleBackColor = true;
+            this.buttonModosit.Click += new System.EventHandler(this.buttonModosit_Click);
             // 
             // buttonUJ
             // 
@@ -158,8 +159,10 @@
             this.dataGridTelefonok.Location = new System.Drawing.Point(0, 203);
             this.dataGridTelefonok.Name = "dataGridTelefonok";
             this.dataGridTelefonok.ReadOnly = true;
+            this.dataGridTelefonok.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridTelefonok.Size = new System.Drawing.Size(545, 268);
             this.dataGridTelefonok.TabIndex = 10;
+            this.dataGridTelefonok.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTelefonok_CellClick);
             // 
             // Form1
             // 
